@@ -19,10 +19,12 @@
     "rules": {
       "preset": "recommended",
       "suspicious": {
-        "noExplicitAny": "error"
+        "noExplicitAny": "error",
+        "noVar": "error"
       },
       "style": {
         "noEnum": "error",
+        "useConst": "error",
         "useImportType": "error"
       }
     }
