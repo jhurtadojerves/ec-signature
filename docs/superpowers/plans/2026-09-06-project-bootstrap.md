@@ -574,3 +574,12 @@ No git remote is configured yet. Once `feature/project-bootstrap` is complete:
 1. Create the remote (e.g., a GitHub repo) and `git remote add origin <url>`.
 2. `git push -u origin feature/project-bootstrap`.
 3. Open a PR into `main` (per the `git-workflow` GitHub Flow this project uses) — do not merge directly.
+
+## Corrections (post-implementation)
+
+This plan was executed by `subagent-driven-development`; a few of its exact code/text blocks were superseded during implementation and are recorded here rather than edited in place, so the history stays honest:
+
+- Task 1's `.gitignore` step: the actual final content also needed a `.worktrees/` line (for this plan's own worktree-isolation setup, unrelated to the plan itself) — see commit `4e7425f`.
+- Task 4's `biome.json`: `"recommended": true` is deprecated in Biome ≥2.5 — migrated to `"preset": "recommended"` via `biome migrate --write` — see commit `f82a6bb`, with explicit rules (`suspicious.noVar`, `style.useConst`) added afterward by the final-review fix wave.
+- Task 3's `result.test.ts` import needs the `.js` extension (`./result.js`) under `tsconfig.json`'s `NodeNext` module resolution — see commit `013afaf`.
+- Task 6 Step 7: Biome's `recommended` preset does not include `noVar` — the actual blocking gate for the `var x = 1;` scratch-file check was `tsc`'s `noUnusedLocals`/`TS6133`, not Biome. `noVar` is now enabled explicitly (final-review fix wave, under `suspicious` rather than `style` — that is where Biome 2.5.12 actually defines the rule), so a future re-run of this exact step would show Biome catching it too.
