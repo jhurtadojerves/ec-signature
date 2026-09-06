@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { err, isErr, isOk, ok } from "./result.js";
+import { err, isErr, isOk, ok, type Result } from "./result.js";
 
 describe("Result", () => {
   it("ok() produces a status 'ok' result carrying the value", () => {
@@ -26,5 +26,14 @@ describe("Result", () => {
 
   it("isErr() returns false for an ok result", () => {
     expect(isErr(ok(1))).toBe(false);
+  });
+
+  it("isOk() narrows the type so .value is accessible and .error is not", () => {
+    const result: Result<number, string> = ok(42);
+    if (isOk(result)) {
+      expect(result.value).toBe(42);
+    } else {
+      throw new Error("expected ok result");
+    }
   });
 });
