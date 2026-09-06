@@ -10,9 +10,12 @@
   "scripts": {
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "lint": "biome check .",
+    "format": "biome format --write ."
   },
   "devDependencies": {
+    "@biomejs/biome": "2.5.12",
     "@vitest/coverage-v8": "5.0.0",
     "typescript": "7.0.2",
     "vitest": "5.0.0"
