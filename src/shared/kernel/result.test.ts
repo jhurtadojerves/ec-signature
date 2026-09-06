@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { err, isErr, isOk, ok } from "./result";
+import { err, isErr, isOk, ok } from "./result.js";
 
 describe("Result", () => {
   it("ok() produces a status 'ok' result carrying the value", () => {
