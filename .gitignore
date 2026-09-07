@@ -1,2 +1,5 @@
 .claude/settings.local.json
 .worktrees/
+node_modules/
+dist/
+coverage/
